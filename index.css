@@ -70,12 +70,15 @@ body.loaded {
    NAV BAR
    ============================================================ */
 #portfolio-nav {
-  background-color: #000;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent */
+  backdrop-filter: blur(10px);          /* blur the background behind navbar */
+  -webkit-backdrop-filter: blur(10px);  /* for Safari */
+  padding: 1.2rem 0;                    /* taller navbar */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: sticky;
   top: 0;
   z-index: 9999;
+  transition: all 0.3s ease;            /* smooth transition for scroll or hover effects */
 }
 
 #portfolio-nav .container {
@@ -283,7 +286,7 @@ body.loaded {
   font-size: var(--fs-small);
   font-weight: 280;
   color: var(--secondary-color);
-  margin-top: -10px;
+  margin-top: 10px;
 }
 
 .right-details {
