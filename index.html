@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <div class="cursor-glow"></div>
     <div id="app">
       <!-- ═══════════════════════════════════════
          NAV BAR  (from app.blade.php)
@@ -983,9 +984,9 @@
         <div class="line-divider">
           <div class="line-divider-details">
             <span class="divider-index">
-              <span class="diamond">&#9670;</span> (01)
+              <span class="diamond">&#9670;</span> (02)
             </span>
-            <span class="divider-title">(About Me)</span>
+            <span class="divider-title">(Projects)</span>
             <span class="divider-copy">&copy; 2026</span>
           </div>
         </div>
@@ -993,7 +994,69 @@
     </div>
     <!-- /#app -->
 
+    <p class="section-title">
+      <span class="light">PROJ</span><span class="bold">ECT</span>
+    </p>
+
+<div id="project" class="project-container reveal">
+
+  <div class="projects-grid">
+
+    <!-- 🔥 FEATURED PROJECT -->
+    <div class="project-card featured highlight" style="--bg: url('uat-form/LOGIN.png')">
+      <span class="number">1</span>
+      <div class="content">
+        <h3>USER ACCEPTANCE FORM</h3>
+        <p>OJT | Case Study – Magellan Solutions</p>
+      </div>
+      <span class="arrow">→</span>
+    </div>
+
+    <!-- OTHER PROJECTS -->
+    <div class="project-card" style="--bg: url('images/p2.jpg')">
+      <span class="number">2</span>
+      <div class="content">
+        <h3>PROJECT NAME</h3>
+        <p>WEB</p>
+      </div>
+    </div>
+
+    <div class="project-card" style="--bg: url('images/p3.jpg')">
+      <span class="number">3</span>
+      <div class="content">
+        <h3>PROJECT NAME</h3>
+        <p>WEB</p>
+      </div>
+    </div>
+
+    <div class="project-card" style="--bg: url('images/p4.jpg')">
+      <span class="number">4</span>
+      <div class="content">
+        <h3>PROJECT NAME</h3>
+        <p>WEB</p>
+      </div>
+    </div>
+
+    <div class="project-card" style="--bg: url('images/p5.jpg')">
+      <span class="number">5</span>
+      <div class="content">
+        <h3>PROJECT NAME</h3>
+        <p>WEB</p>
+      </div>
+    </div>
+
+    <div class="project-card" style="--bg: url('images/p6.jpg')">
+      <span class="number">6</span>
+      <div class="content">
+        <h3>PROJECT NAME</h3>
+        <p>WEB</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
     <!-- Scripts -->
-    <script src="landingpage.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

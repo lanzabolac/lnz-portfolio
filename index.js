@@ -105,3 +105,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+// cursor glow
+const glow = document.querySelector('.cursor-glow');
+
+let x = 0, y = 0;
+let targetX = 0, targetY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  targetX = e.clientX;
+  targetY = e.clientY;
+});
+
+function animate() {
+  x += (targetX - x) * 0.2;
+  y += (targetY - y) * 0.2;
+
+  glow.style.left = x + 'px';
+  glow.style.top = y + 'px';
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+

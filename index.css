@@ -1,3 +1,28 @@
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 600px;
+  height: 600px;
+
+  pointer-events: none;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+
+    transparent 0%,                 /* ❌ no center color */
+      rgba(200,200,200,0.2) 0%,
+  rgba(160,160,160,0.12) 0%,
+  rgba(120,120,120,0.06) 0%,    /* outer */
+    transparent 70%                /* fade out */
+  );
+
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: screen;
+}
 /* ============================================================
    VARIABLES (compiled from variables.scss)
    ============================================================ */
@@ -705,7 +730,7 @@ body.loaded {
    EXPERIENCE SECTION
    ============================================================ */
 .experience-container {
-  padding: 30px 400px;
+  padding: 0px 400px;
 }
 
 .experience-timeline {
@@ -869,3 +894,147 @@ body.loaded {
    MAIN WRAPPER
    ============================================================ */
 main.py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+
+
+/* project */
+/* ============================================================
+   PROJECT SECTION
+   ============================================================ */
+.project-container {
+  padding: 60px 250px 120px;
+}
+
+.project-box {
+  width: 100%;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* CARD */
+.project-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 🔥 makes it a perfect square */
+  overflow: hidden;
+  border-radius: 6px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  transition: all 0.4s ease;
+}
+
+/* Background image */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg) center/cover no-repeat;
+  filter: grayscale(100%) contrast(1.1);
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+/* Dark gradient overlay */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85) 10%,
+    rgba(0,0,0,0.3) 50%,
+    rgba(0,0,0,0.1) 100%
+  );
+  z-index: 1;
+}
+
+/* Hover effect */
+.project-card:hover::before {
+  transform: scale(1.08);
+  filter: grayscale(0%) contrast(1.2);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* NUMBER */
+.project-card .number {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  z-index: 2;
+}
+
+/* CONTENT */
+.project-card .content {
+  position: relative;
+  z-index: 2;
+}
+
+.project-card h3 {
+  font-size: var(--fs-card-title);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.project-card p {
+  font-size: var(--fs-small);
+  color: var(--secondary-color);
+}
+
+/* 🔥 HIGHLIGHT CARD (project 2) */
+.project-card.highlight {
+  border: 1px solid rgba(120,180,255,0.9);
+  box-shadow: 
+    0 0 25px rgba(120,180,255,0.25),
+    inset 0 0 20px rgba(120,180,255,0.1);
+}
+
+/* subtle glow animation */
+.project-card.highlight::after {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.9),
+    rgba(40,100,180,0.3)
+  );
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .project-container {
+    padding: 60px 60px 120px;
+  }
+}
+
+/* 2 columns */
+@media (max-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    aspect-ratio: 1 / 1; /* keep square even on mobile */
+  }
+}
