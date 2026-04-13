@@ -445,3 +445,46 @@ renderList();
 // default UI
 selectedFlagImg.src = `https://flagcdn.com/w40/${selectedCountry.iso}.png`;
 selectedCode.textContent = selectedCountry.code;
+
+
+// email
+// ================= EMAILJS INIT =================
+emailjs.init("JazOQBFJPsktzFUvD");
+
+// ================= SUBMIT FORM =================
+document.querySelector(".contact-submit").addEventListener("click", function () {
+  
+  const name = document.querySelector("input[type='text']").value;
+  const email = document.querySelector("input[type='email']").value;
+  const phone = document.getElementById("phoneInput").value;
+  const message = document.querySelector("textarea").value;
+  const countryCode = document.getElementById("selectedCode").textContent;
+
+  if (!name || !email || !phone || !message) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const params = {
+    name: name,
+    email: email,
+    phone: countryCode + " " + phone,
+    message: message
+  };
+
+  emailjs.send("service_lyg4qwe", "template_esa8mnl", params)
+    .then(() => {
+      alert("Message sent successfully! ✅");
+
+      // clear form
+      document.querySelector("input[type='text']").value = "";
+      document.querySelector("input[type='email']").value = "";
+      document.getElementById("phoneInput").value = "";
+      document.querySelector("textarea").value = "";
+
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Failed to send message ❌");
+    });
+});
