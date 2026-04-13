@@ -469,7 +469,8 @@ document.querySelector(".contact-submit").addEventListener("click", function () 
     name: name,
     email: email,
     phone: countryCode + " " + phone,
-    message: message
+    message: message,
+    time: new Date().toLocaleString()
   };
 
   emailjs.send("service_lyg4qwe", "template_esa8mnl", params)
