@@ -311,6 +311,7 @@ const searchInput = document.getElementById("searchInput");
 const selectedFlagImg = document.getElementById("selectedFlagImg");
 const selectedCode = document.getElementById("selectedCode");
 
+
 const phoneInput = document.getElementById("phoneInput");
 const phoneError = document.getElementById("phoneError");
 
@@ -459,8 +460,9 @@ document.querySelector(".contact-submit").addEventListener("click", function () 
   const phone = document.getElementById("phoneInput").value;
   const message = document.querySelector("textarea").value;
   const countryCode = document.getElementById("selectedCode").textContent;
+  const subject = document.getElementById("subjectInput").value;
 
-  if (!name || !email || !phone || !message) {
+if (!name || !email || !phone || !subject || !message) {
     alert("Please fill all fields");
     return;
   }
@@ -468,6 +470,7 @@ document.querySelector(".contact-submit").addEventListener("click", function () 
   const params = {
     name: name,
     email: email,
+    subject: subject,
     phone: countryCode + " " + phone,
     message: message,
     time: new Date().toLocaleString()
@@ -481,6 +484,7 @@ document.querySelector(".contact-submit").addEventListener("click", function () 
       document.querySelector("input[type='text']").value = "";
       document.querySelector("input[type='email']").value = "";
       document.getElementById("phoneInput").value = "";
+      document.getElementById("subjectInput").value = "";
       document.querySelector("textarea").value = "";
 
     })
@@ -489,3 +493,83 @@ document.querySelector(".contact-submit").addEventListener("click", function () 
       alert("Failed to send message ❌");
     });
 });
+
+// ── Experience Tab Switching ────────────────────────────────────
+const expNavItems = document.querySelectorAll('.exp-nav-item');
+const expTabPanels = document.querySelectorAll('.exp-tab-panel');
+ 
+expNavItems.forEach(function(navBtn) {
+  navBtn.addEventListener('click', function() {
+    const targetTab = this.dataset.tab;
+ 
+    // Update nav active states
+    expNavItems.forEach(function(btn) {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    this.classList.add('active');
+    this.setAttribute('aria-selected', 'true');
+ 
+    // Switch panels
+    expTabPanels.forEach(function(panel) {
+      panel.classList.remove('active');
+    });
+ 
+    var targetPanel = document.getElementById('tab-' + targetTab);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+  });
+});
+ 
+// ── Accordion Expand / Collapse ─────────────────────────────────
+var expExpandBtns = document.querySelectorAll('.exp-expand-btn');
+ 
+expExpandBtns.forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation(); // don't bubble to card hover
+    var card = this.closest('.exp-card');
+    var body = card.querySelector('.exp-card-body');
+    var isOpen = body.classList.contains('open');
+ 
+    // Collapse all other cards in this panel (optional — remove if you want multi-open)
+    var panel = card.closest('.exp-tab-panel');
+    if (panel) {
+      panel.querySelectorAll('.exp-card-body.open').forEach(function(openBody) {
+        openBody.classList.remove('open');
+        openBody.closest('.exp-card').querySelector('.exp-expand-btn').classList.remove('open');
+        openBody.closest('.exp-card').querySelector('.exp-expand-btn').setAttribute('aria-expanded', 'false');
+      });
+    }
+ 
+    // Toggle this one
+    if (!isOpen) {
+      body.classList.add('open');
+      this.classList.add('open');
+      this.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+
+// view certificate
+const modalcert = document.getElementById("certModal");
+const modalImg = document.getElementById("certModalImg");
+const closeBtncert = document.querySelector(".cert-close");
+
+document.querySelectorAll(".exp-view-cert-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    modalcert.style.display = "flex";
+    modalImg.src = btn.getAttribute("data-cert");
+  });
+});
+
+closeBtncert.onclick = () => modalcert.style.display = "none";
+
+modalcert.onclick = (e) => {
+  if (e.target === modalcert) {
+    modalcert.style.display = "none";
+  }
+};
+
+
