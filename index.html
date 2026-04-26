@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    
+
     <title>My Portfolio</title>
 
     <!-- Fonts -->
@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="index.js" defer></script>
+    <!-- <script src="index.js" defer></script> -->
     <!-- Styles -->
     <link rel="stylesheet" href="index.css" />
   </head>
@@ -70,26 +70,32 @@
     ═══════════════════════════════════════ -->
       <main class="py-4">
         <!-- HOME ────────────────────────────── -->
-        <div id="home" class="home-container reveal">
-          <div class="home-image">
-            <img src="img/lanz_img.png" alt="Lanz portrait" />
-          </div>
+        <!-- home-container is the flex parent -->
+      <div class="home-container reveal" id="home">
 
-          <div class="left-details">
-            <p class="name">Lanz Paulo Flores Abolac</p>
-            <p class="subdetail">Web Developer</p>
-            <a href="files/Abolac_Lanz_Paulo_CV.pdf" download class="cv-btn">
-              Download CV
-            </a>
-          </div>
-
-          <div class="right-details">
-            <p class="subdetail2">
-              Passionate web developer focused on creating clean, modern, and
-              user-friendly web applications that solve real problems.
-            </p>
-          </div>
+        <div class="home-image">          <!-- order: 1 -->
+          <img src="img/lanz_img.png" />
         </div>
+
+        <div class="left-details"> 
+          <p class="name">Lanz Paulo Abolac</p>
+          <p class="subdetail">Web Developer</p>
+        </div>
+
+        <div class="right-details"> 
+          <p class="subdetail2">Passionate web developer focused on creating clean, modern, and
+              user-friendly web applications that solve real problems.</p>
+        </div>
+
+
+        <div class="home-cta">
+          <a class="cv-btn2" href="#contact">Let's Get in Touch</a>
+          <a class="cv-btn"  href="files/Abolac_Lanz_Paulo_CV.pdf" download>Download CV</a>
+        </div>
+
+
+
+      </div>
 
         <!-- DIVIDER ─────────────────────────── -->
         <div class="line-divider">
@@ -126,31 +132,62 @@
             <p class="social">Social</p>
 
             <div class="social-wrapper">
-              <a href="https://www.facebook.com/lanz.abolac.2024" target="blank" class="social-btn facebook">
+              <a
+                href="https://www.facebook.com/lanz.abolac.2024"
+                target="blank"
+                class="social-btn facebook"
+              >
                 <svg viewBox="0 0 24 24">
-                  <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/>
+                  <path
+                    d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"
+                  />
                 </svg>
               </a>
 
-              <a href="https://github.com/lanzabolac" class="social-btn github" target="blank">
+              <a
+                href="https://github.com/lanzabolac"
+                class="social-btn github"
+                target="blank"
+              >
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.7-.7 2.1-1.1.1-.7.4-1.2.7-1.5-2.7-.3-5.6-1.4-5.6-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.7 4 18.7 4.3 18.7 4.3c.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.7-5.6 6.1.5.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 24 12.7 12 12 0 0 0 12 .5z"/>
+                  <path
+                    d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.7-.7 2.1-1.1.1-.7.4-1.2.7-1.5-2.7-.3-5.6-1.4-5.6-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.7 4 18.7 4.3 18.7 4.3c.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.7-5.6 6.1.5.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 24 12.7 12 12 0 0 0 12 .5z"
+                  />
                 </svg>
               </a>
 
-              <a href="https://www.instagram.com/flrslnz_/" class="social-btn instagram" target="blank">
+              <a
+                href="https://www.instagram.com/flrslnz_/"
+                class="social-btn instagram"
+                target="blank"
+              >
                 <svg viewBox="0 0 24 24">
-                  <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm6.5-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/>
+                  <path
+                    d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm6.5-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"
+                  />
                 </svg>
               </a>
 
-              <a href="https://www.linkedin.com/in/abolac/" class="social-btn linkedin" target="blank">
+              <a
+                href="https://www.linkedin.com/in/abolac/"
+                class="social-btn linkedin"
+                target="blank"
+              >
                 <svg viewBox="0 0 24 24">
-                  <path d="M4.98 3.5C4.98 5 3.8 6.2 2.3 6.2S-.4 5-.4 3.5 1 1 2.3 1s2.68 1.2 2.68 2.5zM.2 8h4.2v12H.2V8zm7.6 0h4v1.6h.1c.6-1.1 2-2.2 4-2.2 4.3 0 5.1 2.8 5.1 6.4V20h-4.2v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V20H7.8V8z"/>
+                  <path
+                    d="M4.98 3.5C4.98 5 3.8 6.2 2.3 6.2S-.4 5-.4 3.5 1 1 2.3 1s2.68 1.2 2.68 2.5zM.2 8h4.2v12H.2V8zm7.6 0h4v1.6h.1c.6-1.1 2-2.2 4-2.2 4.3 0 5.1 2.8 5.1 6.4V20h-4.2v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V20H7.8V8z"
+                  />
                 </svg>
               </a>
-              <a href="mailto:lanzpaulo@gmail.com" class="social-btn email" target="_blank">                <svg viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/>
+              <a
+                href="mailto:lanzpaulo@gmail.com"
+                class="social-btn email"
+                target="_blank"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"
+                  />
                 </svg>
               </a>
             </div>
@@ -927,19 +964,22 @@
         </p>
 
         <div id="experience" class="experience-container reveal">
- 
           <div class="exp-layout">
             <!-- ═══════════ LEFT SIDEBAR NAV ═══════════ -->
             <aside class="exp-sidebar">
-        
               <div class="exp-sidebar-meta">
                 <p class="exp-sidebar-sub">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an
                 </p>
               </div>
-        
-              <nav class="exp-nav" role="tablist" aria-label="Experience categories">
-        
+
+              <nav
+                class="exp-nav"
+                role="tablist"
+                aria-label="Experience categories"
+              >
                 <button
                   class="exp-nav-item active"
                   data-tab="experience"
@@ -951,16 +991,23 @@
                   <span class="exp-nav-bg"></span>
                   <span class="exp-nav-icon" aria-hidden="true">
                     <!-- Briefcase icon -->
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="7" width="20" height="14" rx="2"/>
-                      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                      <line x1="12" y1="12" x2="12" y2="16"/>
-                      <line x1="10" y1="14" x2="14" y2="14"/>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="2" y="7" width="20" height="14" rx="2" />
+                      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                      <line x1="12" y1="12" x2="12" y2="16" />
+                      <line x1="10" y1="14" x2="14" y2="14" />
                     </svg>
                   </span>
                   <span class="exp-nav-label">Experience</span>
                 </button>
-        
+
                 <button
                   class="exp-nav-item"
                   data-tab="education"
@@ -972,14 +1019,21 @@
                   <span class="exp-nav-bg"></span>
                   <span class="exp-nav-icon" aria-hidden="true">
                     <!-- Graduation cap icon -->
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                      <path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                      <path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5" />
                     </svg>
                   </span>
                   <span class="exp-nav-label">Education</span>
                 </button>
-        
+
                 <button
                   class="exp-nav-item"
                   data-tab="certification"
@@ -991,32 +1045,45 @@
                   <span class="exp-nav-bg"></span>
                   <span class="exp-nav-icon" aria-hidden="true">
                     <!-- Award/medal icon -->
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="8" r="6"/>
-                      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
                     </svg>
                   </span>
                   <span class="exp-nav-label">Certification</span>
                 </button>
-        
               </nav>
-        
+
               <p class="exp-sidebar-tip">
                 <span class="exp-tip-icon" aria-hidden="true">
                   <!-- Lightbulb icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"
+                    />
                   </svg>
                 </span>
                 Click tabs to switch sections. Click + to expand details.
               </p>
-        
             </aside>
             <!-- /exp-sidebar -->
-        
+
             <!-- ═══════════ RIGHT CONTENT CARDS ═══════════ -->
             <div class="exp-content-area">
-        
               <!-- ── TAB: EXPERIENCE ── -->
               <div
                 id="tab-experience"
@@ -1024,40 +1091,66 @@
                 role="tabpanel"
                 aria-labelledby="nav-experience"
               >
-        
                 <!-- Card 1 -->
                 <article class="exp-card" data-expanded="false">
                   <div class="exp-card-header">
                     <div class="exp-card-left">
                       <div class="exp-card-meta">
                         <span class="exp-card-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
                           </svg>
                         </span>
-                        <span class="exp-card-date">December 2025 – March 2026</span>
+                        <span class="exp-card-date"
+                          >December 2025 – March 2026</span
+                        >
                       </div>
                       <h3 class="exp-card-title">Web Developer Intern</h3>
                       <div class="exp-card-company">
                         <span class="exp-card-company-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect x="2" y="7" width="20" height="14" rx="2" />
+                            <path
+                              d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
+                            />
                           </svg>
                         </span>
                         <span>Magellan Solutions</span>
                       </div>
                     </div>
-                    <button class="exp-expand-btn" aria-label="Expand card details" aria-expanded="false">
+                    <button
+                      class="exp-expand-btn"
+                      aria-label="Expand card details"
+                      aria-expanded="false"
+                    >
                       <span class="exp-expand-icon">+</span>
                     </button>
                   </div>
-        
+
                   <div class="exp-card-body" role="region" aria-live="polite">
                     <div class="exp-card-body-inner">
                       <p class="exp-card-desc">
-                        Developed and maintained backend features using Laravel and MySQL.
-                        Improving system performance by 30% and reducing response time by 25%.
-                        Collaborated with the dev team to ship key product features under tight deadlines.
+                        Developed and maintained backend features using Laravel
+                        and MySQL. Improving system performance by 30% and
+                        reducing response time by 25%. Collaborated with the dev
+                        team to ship key product features under tight deadlines.
                       </p>
                       <div class="exp-card-tags">
                         <span class="exp-tag">Laravel</span>
@@ -1066,16 +1159,19 @@
                         <span class="exp-tag">PHP</span>
                       </div>
                       <div class="exp-card-actions">
-                        <button class="exp-view-cert-btn" data-cert="certificates/packet-tracer.png">
+                        <button
+                          class="exp-view-cert-btn"
+                          data-cert="certificates/coc.png"
+                        >
                           View Certificate
                         </button>
                       </div>
                     </div>
                   </div>
                 </article>
-        
+
                 <div class="exp-card-divider"></div>
-        
+
                 <!-- Card 2 -->
                 <!-- <article class="exp-card" data-expanded="false">
                   <div class="exp-card-header">
@@ -1120,7 +1216,7 @@
                 </article>
         
                 <div class="exp-card-divider"></div> -->
-        
+
                 <!-- Card 3 — Active Now -->
                 <!-- <article class="exp-card" data-expanded="false">
                   <div class="exp-card-header">
@@ -1164,10 +1260,9 @@
                     </div>
                   </div>
                 </article> -->
-        
               </div>
               <!-- /tab-experience -->
-        
+
               <!-- ── TAB: EDUCATION ── -->
               <div
                 id="tab-education"
@@ -1175,14 +1270,23 @@
                 role="tabpanel"
                 aria-labelledby="nav-education"
               >
-        
                 <article class="exp-card" data-expanded="false">
                   <div class="exp-card-header">
                     <div class="exp-card-left">
                       <div class="exp-card-meta">
                         <span class="exp-card-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
                           </svg>
                         </span>
                         <span class="exp-card-date">2022 – 2026</span>
@@ -1191,24 +1295,37 @@
                       <h3 class="exp-card-title">BS Information Technology</h3>
                       <div class="exp-card-company">
                         <span class="exp-card-company-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5" />
                           </svg>
                         </span>
                         <span>Bulacan State University – Bustos Campus</span>
                       </div>
                     </div>
-                    <button class="exp-expand-btn" aria-label="Expand card details" aria-expanded="false">
+                    <button
+                      class="exp-expand-btn"
+                      aria-label="Expand card details"
+                      aria-expanded="false"
+                    >
                       <span class="exp-expand-icon">+</span>
                     </button>
                   </div>
-        
+
                   <div class="exp-card-body" role="region" aria-live="polite">
                     <div class="exp-card-body-inner">
                       <p class="exp-card-desc">
-                        Focused on backend development, databases, and software engineering.
-                        Relevant coursework includes data structures, algorithms, web systems,
-                        system analysis, and object-oriented programming.
+                        Focused on backend development, databases, and software
+                        engineering. Relevant coursework includes data
+                        structures, algorithms, web systems, system analysis,
+                        and object-oriented programming.
                       </p>
                       <div class="exp-card-tags">
                         <span class="exp-tag">Information Technology</span>
@@ -1227,32 +1344,60 @@
                     <div class="exp-card-left">
                       <div class="exp-card-meta">
                         <span class="exp-card-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
                           </svg>
                         </span>
                         <span class="exp-card-date">2020 – 2022</span>
                         <!-- <span class="exp-badge-active">Active Now</span> -->
                       </div>
-                      <h3 class="exp-card-title">Information & Communications Technology (ICT) Programming</h3>
+                      <h3 class="exp-card-title">
+                        Information & Communications Technology (ICT)
+                        Programming
+                      </h3>
                       <div class="exp-card-company">
                         <span class="exp-card-company-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5" />
                           </svg>
                         </span>
                         <span>Aclc College of Baliuag</span>
                       </div>
                     </div>
-                    <button class="exp-expand-btn" aria-label="Expand card details" aria-expanded="false">
+                    <button
+                      class="exp-expand-btn"
+                      aria-label="Expand card details"
+                      aria-expanded="false"
+                    >
                       <span class="exp-expand-icon">+</span>
                     </button>
                   </div>
-        
+
                   <div class="exp-card-body" role="region" aria-live="polite">
                     <div class="exp-card-body-inner">
                       <p class="exp-card-desc">
-                       Focused on ICT programming with an emphasis on backend development, databases, and software engineering. Relevant training includes data structures, basic programming, system development, and Oracle.
+                        Focused on ICT programming with an emphasis on backend
+                        development, databases, and software engineering.
+                        Relevant training includes data structures, basic
+                        programming, system development, and Oracle.
                       </p>
                       <div class="exp-card-tags">
                         <span class="exp-tag">Information Technology</span>
@@ -1261,10 +1406,9 @@
                     </div>
                   </div>
                 </article>
-        
               </div>
               <!-- /tab-education -->
-        
+
               <!-- ── TAB: CERTIFICATION ── -->
               <div
                 id="tab-certification"
@@ -1272,38 +1416,68 @@
                 role="tabpanel"
                 aria-labelledby="nav-certification"
               >
-        
                 <article class="exp-card" data-expanded="false">
                   <div class="exp-card-header">
                     <div class="exp-card-left">
                       <div class="exp-card-meta">
                         <span class="exp-card-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
                           </svg>
                         </span>
                         <span class="exp-card-date"> May 2024</span>
                         <span class="exp-badge-active">Verified</span>
                       </div>
-                      <h3 class="exp-card-title">Cisco Networking Academy® Introduction to Packet Tracer</h3>
+                      <h3 class="exp-card-title">
+                        Cisco Networking Academy® Introduction to Packet Tracer
+                      </h3>
                       <div class="exp-card-company">
                         <span class="exp-card-company-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <circle cx="12" cy="8" r="6" />
+                            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
                           </svg>
                         </span>
-                        <span>Networking | Bulacan State University - Bustos Campus</span>
+                        <span
+                          >Networking | Bulacan State University - Bustos
+                          Campus</span
+                        >
                       </div>
                     </div>
-                    <button class="exp-expand-btn" aria-label="Expand card details" aria-expanded="false">
+                    <button
+                      class="exp-expand-btn"
+                      aria-label="Expand card details"
+                      aria-expanded="false"
+                    >
                       <span class="exp-expand-icon">+</span>
                     </button>
                   </div>
-        
+
                   <div class="exp-card-body" role="region" aria-live="polite">
                     <div class="exp-card-body-inner">
                       <p class="exp-card-desc">
-                        Completed training in network simulation using Cisco Packet Tracer, with hands-on experience in building and troubleshooting basic network topologies and understanding core networking concepts like IP addressing and protocols.
+                        Completed training in network simulation using Cisco
+                        Packet Tracer, with hands-on experience in building and
+                        troubleshooting basic network topologies and
+                        understanding core networking concepts like IP
+                        addressing and protocols.
                       </p>
                       <div class="exp-card-tags">
                         <span class="exp-tag">Verified</span>
@@ -1311,26 +1485,24 @@
                         <span class="exp-tag">IP Addressing</span>
                       </div>
                       <div class="exp-card-actions">
-                        <button class="exp-view-cert-btn" data-cert="certificates/packet-tracer.png">
+                        <button
+                          class="exp-view-cert-btn"
+                          data-cert="certificates/packet-tracer.png"
+                        >
                           View Certificate
                         </button>
                       </div>
                     </div>
                   </div>
                 </article>
-        
               </div>
               <!-- /tab-certification -->
-        
             </div>
             <!-- /exp-content-area -->
-        
           </div>
           <!-- /exp-layout -->
-        
         </div>
         <!-- /#experience -->
- 
 
         <!-- BOTTOM DIVIDER ──────────────────── -->
         <div class="line-divider">
@@ -1351,91 +1523,118 @@
     </p>
 
     <div id="project" class="project-container reveal">
-      <div class="projects-grid">
-        <!-- 🔥 FEATURED PROJECT -->
-        <div
-          class="project-card"
-          style="--bg: url(&quot;uat-form/LOGIN.png&quot;)"
-          data-title="USER ACCEPTANCE FORM"
-          data-subtitle="OJT Project – Magellan Solutions"
-          data-image="uat-form/LOGIN.png"
-          data-description="The User Acceptance Test (UAT) Form is a web-based application developed to streamline the process of user testing within an organization. It allows testers to execute test cases, submit feedback, and record results in a structured and efficient way. Built using Laravel, HTML, CSS, and JavaScript, the system focuses on usability and performance. It helps teams ensure that software meets business requirements before deployment by providing a centralized platform for managing test cases and user feedback. The project emphasizes clean UI/UX design, reliable data handling, and ease of use, making it suitable for internal quality assurance processes."
-          data-features="User-Friendly Form Interface,Automated Test Case Recording,Validation & Error Handling,Real-Time Feedback Submission,Role-Based Access,Secure Data Handling,Responsive Design"
-          data-tags="Web Application,Backend,Laravel"
-          data-project="User Acceptance Form"
-          data-client="Magellan Solutions"
-          data-role="Backend Developer"
-          data-period="January 2026 - March 2026"
-          data-tools="Php, Javascript, CSS, NodeJs, Bootstrap, MySql"
-          data-images="uat-form/LOGIN.png,uat-form/DASHBOARD.png,uat-form/REPORT.png,uat-form/EVALUATION.png"
-        >
-          <span class="number">1</span>
-          <div class="content">
-            <h3>USER ACCEPTANCE FORM</h3>
-            <p>OJT | Project – Magellan Solutions</p>
+      <div class="showcase-wrapper">
+        <!-- PREV ARROW -->
+        <button class="showcase-arrow showcase-prev" aria-label="Previous">
+          &#8249;
+        </button>
+
+        <!-- TRACK -->
+        <div class="showcase-viewport">
+          <div class="showcase-track" id="showcaseTrack">
+            <div
+              class="showcase-slide"
+              data-title="USER ACCEPTANCE FORM"
+              data-subtitle="OJT Project – Magellan Solutions"
+              data-image="uat-form/LOGIN.png"
+              data-description="A web-based UAT system built with Laravel to streamline user testing within an organization."
+              data-tags="Web Application,Backend,Laravel"
+              data-project="User Acceptance Form"
+              data-client="Magellan Solutions"
+              data-role="Backend Developer"
+              data-period="January 2026 – March 2026"
+              data-tools="PHP, JavaScript, CSS, NodeJs, Bootstrap, MySQL"
+              data-features="User-Friendly Form Interface,Automated Test Case Recording,Validation & Error Handling,Real-Time Feedback Submission,Role-Based Access,Secure Data Handling,Responsive Design"
+              data-images="uat-form/LOGIN.png,uat-form/DASHBOARD.png,uat-form/UAT_LIST.png,uat-form/UAT FORM.png,uat-form/UAT_BATCH.png,uat-form/EVALUATION.png
+              ,uat-form/REQUEST_ITEM.png,uat-form/EVALUATION.png,uat-form/EVAL_WITH_LAMAN.png,uat-form/REPORT.png
+              ,uat-form/REPORT_PREVIEW.png,uat-form/ABOUT.png"
+            >
+              <div class="slide-frame">
+                <img src="uat-form/LOGIN.png" alt="UAT Form" />
+              </div>
+            </div>
+
+            <div
+              class="showcase-slide"
+              data-title="FACULTY MONITORING"
+              data-subtitle="Capstone Project"
+              data-image="pasta/login.jpg"
+              data-description="A web-based UAT system built with Laravel to streamline user testing within an organization."
+            >
+              <div class="slide-frame">
+                <img src="pasta/login.jpg" alt="Faculty Monitoring" />
+              </div>
+            </div>
+
+            <div
+              class="showcase-slide"
+              data-title="COFFEE SPOT"
+              data-subtitle="Web 2 – Project"
+              data-image="images/p3.jpg"
+            >
+              <div class="slide-frame">
+                <img src="images/p3.jpg" alt="Coffee Spot" />
+              </div>
+            </div>
+
+            <div
+              class="showcase-slide"
+              data-title="PASTA & CO."
+              data-subtitle="Web 1 – Frontend Activity"
+              data-image="pasta/login.png"
+              data-tags="Web Application,Frontend"
+              data-project="Pasta & Co."
+              data-client="Bulacan State University"
+              data-role="Frontend Developer"
+              data-period="2025"
+              data-tools="HTML, CSS, JavaScript, Bootstrap"
+              data-features="Responsive Layout,Product Listings,Cart System"
+              data-images="pasta/login.png,pasta/home.png,pasta/hom2.png,pasta/menu.png, pasta/menu2.png
+              ,pasta/menu3.png, pasta/menu4.png,pasta/contact.png, pasta/about.png,pasta/about2.png, pasta/about3.png"
+            >
+              <div class="slide-frame">
+                <img src="pasta/login.png" alt="Pasta & Co." />
+              </div>
+            </div>
+
+            <div
+              class="showcase-slide"
+              data-title="PROJECT NAME"
+              data-subtitle="Web"
+            >
+              <div class="slide-frame">
+                <img src="images/p4.jpg" alt="Project 5" />
+              </div>
+            </div>
+
+            <div
+              class="showcase-slide"
+              data-title="PROJECT NAME"
+              data-subtitle="Web"
+            >
+              <div class="slide-frame">
+                <img src="images/p5.jpg" alt="Project 6" />
+              </div>
+            </div>
           </div>
-          <span class="arrow">→</span>
         </div>
 
-        <!-- OTHER PROJECTS -->
-        <div
-          class="project-card"
-          style="--bg: url(&quot;pasta/login.jpg&quot;)"
-        >
-          <span class="number">2</span>
-          <div class="content">
-            <h3>FACULTY MONITORING</h3>
-            <p>Capstone Project</p>
-          </div>
-        </div>
+        <!-- NEXT ARROW -->
+        <button class="showcase-arrow showcase-next" aria-label="Next">
+          &#8250;
+        </button>
+      </div>
 
-        <div class="project-card" style="--bg: url(&quot;images/p3.jpg&quot;)">
-          <span class="number">3</span>
-          <div class="content">
-            <h3>COFFEE SPOT</h3>
-            <p>Web 2 - Project</p>
-          </div>
-        </div>
+      <!-- DOTS -->
+      <div class="showcase-dots" id="showcaseDots"></div>
 
-        <div
-          class="project-card"
-          style="--bg: url(&quot;pasta/login.png&quot;)"
-          data-title="PASTA & CO."
-          data-subtitle="WEB 1 Project - Bulacan State University"
-          data-image="pasta/login.png"
-          data-description="The User Acceptance Test (UAT) Form is a web-based application developed to streamline the process of user testing within an organization. It allows testers to execute test cases, submit feedback, and record results in a structured and efficient way. Built using Laravel, HTML, CSS, and JavaScript, the system focuses on usability and performance. It helps teams ensure that software meets business requirements before deployment by providing a centralized platform for managing test cases and user feedback. The project emphasizes clean UI/UX design, reliable data handling, and ease of use, making it suitable for internal quality assurance processes."
-          data-features="User-Friendly Form Interface,Automated Test Case Recording,Validation & Error Handling,Real-Time Feedback Submission,Role-Based Access,Secure Data Handling,Responsive Design"
-          data-tags="Web Application,Backend,Laravel"
-          data-project="User Acceptance Form"
-          data-client="Magellan Solutions"
-          data-role="Frontend Developer"
-          data-period="January 2026 - March 2026"
-          data-tools="Php, Javascript, CSS, NodeJs, Bootstrap, MySql"
-          data-link="#"
-          data-images="uat-form/LOGIN.png,uat-form/DASHBOARD.png,uat-form/REPORT.png,uat-form/EVALUATION.png"
-        >
-          <span class="number">4</span>
-          <div class="content">
-            <h3>PASTA & CO.</h3>
-            <p>Web 1 | Activity - Frontend</p>
-          </div>
-        </div>
-
-        <div class="project-card" style="--bg: url(&quot;images/p4.jpg&quot;)">
-          <span class="number">5</span>
-          <div class="content">
-            <h3>PROJECT NAME</h3>
-            <p>WEB</p>
-          </div>
-        </div>
-
-        <div class="project-card" style="--bg: url(&quot;images/p5.jpg&quot;)">
-          <span class="number">6</span>
-          <div class="content">
-            <h3>PROJECT NAME</h3>
-            <p>WEB</p>
-          </div>
-        </div>
+      <!-- SLIDE INFO -->
+      <div class="showcase-info">
+        <h3 id="showcaseTitle"></h3>
+        <p id="showcaseSubtitle"></p>
+        <button class="showcase-open-btn" id="showcaseOpenBtn">
+          VIEW PROJECT →
+        </button>
       </div>
     </div>
 
@@ -1449,6 +1648,7 @@
         <span class="divider-copy">&copy; 2026</span>
       </div>
     </div>
+
     <!-- contact -->
     <p class="section-title">
       <span class="light">LET'S GET</span><span class="bold"> IN TOUCH</span>
@@ -1535,38 +1735,67 @@
             <span>Philippines</span>
           </div>
         </div>
-          <div class="contact-socials">
-            <a href="https://www.facebook.com/lanz.abolac.2024" target="_blank" class="social-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12H17l-.5 3h-2.4v7A10 10 0 0 0 22 12z"/>
-                </svg>
-            </a>
+        <div class="contact-socials">
+          <a
+            href="https://www.facebook.com/lanz.abolac.2024"
+            target="_blank"
+            class="social-btn"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12H17l-.5 3h-2.4v7A10 10 0 0 0 22 12z"
+              />
+            </svg>
+          </a>
 
-            <a href="https://github.com/lanzabolac" target="_blank" class="social-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6 1.4 1.6 1.4.9 1.5 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.3-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/>
-                </svg>
-            </a>
+          <a
+            href="https://github.com/lanzabolac"
+            target="_blank"
+            class="social-btn"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6 1.4 1.6 1.4.9 1.5 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.3-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6A11.5 11.5 0 0 0 12 .5z"
+              />
+            </svg>
+          </a>
 
-            <a href="https://www.instagram.com/flrslnz_/" target="_blank" class="social-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm4.5-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg>
-            </a>
+          <a
+            href="https://www.instagram.com/flrslnz_/"
+            target="_blank"
+            class="social-btn"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm4.5-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </a>
 
-            <a href="https://www.linkedin.com/in/abolac/" target="_blank" class="social-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.4 2.4 4.4 5.5v6.1zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.4H3.5V9h3.6v11.4z"/>
-                </svg>
-            </a>
-            <a href="mailto:abolaclanzpaulo@gmail.com" class="social-btn gmail" target="_blank">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/>
-              </svg>
-            </a>
-          </div>
+          <a
+            href="https://www.linkedin.com/in/abolac/"
+            target="_blank"
+            class="social-btn"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.4 2.4 4.4 5.5v6.1zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.4H3.5V9h3.6v11.4z"
+              />
+            </svg>
+          </a>
+          <a
+            href="mailto:abolaclanzpaulo@gmail.com"
+            class="social-btn gmail"
+            target="_blank"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"
+              />
+            </svg>
+          </a>
+        </div>
       </div>
-      
 
       <div class="contact-right">
         <input
@@ -1579,7 +1808,12 @@
           type="email"
           placeholder="Enter your email address ..."
         />
-        <input class="contact-input" type="text" id="subjectInput" placeholder="Subject">
+        <input
+          class="contact-input"
+          type="text"
+          id="subjectInput"
+          placeholder="Subject"
+        />
 
         <div class="phone-row">
           <div class="country-select-wrap">
@@ -1626,18 +1860,12 @@
           placeholder="Message"
         ></textarea>
         <button class="contact-submit" type="button">SUBMIT FORM</button>
-
       </div>
     </div>
 
-
-
-
-
-
     <!-- MODAL -->
-     <!-- modal view cert -->
-     <div class="cert-modal" id="certModal">
+    <!-- modal view cert -->
+    <div class="cert-modal" id="certModal">
       <span class="cert-close">&times;</span>
       <img class="cert-modal-img" id="certModalImg" />
     </div>
