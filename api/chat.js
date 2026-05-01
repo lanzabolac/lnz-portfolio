@@ -14,7 +14,6 @@ const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on La
 - Social media: GitHub at lanzabolac, LinkedIn at /in/abolac/, Facebook, Instagram at flrslnz_
 
 Keep answers concise, friendly, and professional. Only answer questions about Lanz or general web development topics.`;
-
 export default async function handler(req) {
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -30,47 +29,42 @@ export default async function handler(req) {
   try {
     const { history } = await req.json();
 
-    // ✅ Use the correct Gemini 2.5 Flash Preview model string
-    const MODEL = "gemini-2.5-flash-preview-05-20";
+    const MODEL = "gemini-1.5-flash";
 
-    const geminiRes = await fetch(
+    const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          // ✅ System prompt goes here — NOT inside contents
-          systemInstruction: {
-            parts: [{ text: SYSTEM_CONTEXT }],
-          },
-          // ✅ Just pass history directly — no fake primer turns needed
-          contents: history,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 512,
-          },
-        }),
+  contents: [
+    {
+      role: "user",
+      parts: [{ text: SYSTEM_CONTEXT }],
+    },
+    ...(history || []),
+  ],
+  generationConfig: {
+    temperature: 0.7,
+    maxOutputTokens: 512,
+  },
+}),
       }
     );
 
-    const data = await geminiRes.json();
+    const data = await res.json();
 
-    // ✅ Log the full error so you can see it in Vercel's function logs
-    if (!geminiRes.ok) {
-      console.error("[Gemini API Error]", JSON.stringify(data));
-      return new Response(
-        JSON.stringify({ error: "Gemini API error", details: data }),
-        {
-          status: geminiRes.status,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+    if (!res.ok) {
+      console.log("GEMINI ERROR:", data);
+      return new Response(JSON.stringify(data), {
+        status: res.status,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    return new Response(JSON.stringify(data), {
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    return new Response(JSON.stringify({ text }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
@@ -78,13 +72,9 @@ export default async function handler(req) {
       },
     });
   } catch (err) {
-    console.error("[Handler Error]", err.message);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    return new Response(
+      JSON.stringify({ error: err.message }),
+      { status: 500 }
+    );
   }
 }
