@@ -1,4 +1,4 @@
-// export const config = { runtime: "edge" };
+export const config = { runtime: "edge" };
 
 const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on Lanz Paulo Abolac's personal portfolio website. Your role is to help visitors learn about Lanz and his work. Here is everything about Lanz:
 
