@@ -1,8 +1,4 @@
 // ── GEMINI CHATBOT WIDGET ──────────────────────────────────
-const GEMINI_API_KEY = "AIzaSyDNqxu7M4v90xdDjYDFv0wyXzbc6qVt4Jw";
-const MODEL = "gemini-3-flash-preview";
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-
 const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on Lanz Paulo Abolac's personal portfolio website. Your role is to help visitors learn about Lanz and his work. Here is everything about Lanz:
 
 - Full name: Lanz Paulo Abolac
@@ -98,11 +94,10 @@ function injectGeminiChat() {
     if (isOpen) setTimeout(() => inputEl.focus(), 250);
   });
 
-  // ── QUICK BUTTONS — always visible, never hidden ──────────
+  // ── QUICK BUTTONS ─────────────────────────────────────────
   panel.querySelectorAll(".gchat-quick-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       sendMessage(btn.getAttribute("data-q"));
-      // quick buttons stay visible — no hide call
     });
   });
 
@@ -174,46 +169,16 @@ function injectGeminiChat() {
     inputEl.disabled = true;
     showTyping();
 
-    const contents = [
-      {
-        role: "user",
-        parts: [{ text: SYSTEM_CONTEXT + "\n\nPlease confirm you understand your role." }]
-      },
-      {
-        role: "model",
-        parts: [{ text: "Understood! I'm Pau, ready to help visitors learn about Lanz Paulo Abolac. What would you like to know?" }]
-      },
-      ...chatHistory,
-      { role: "user", parts: [{ text: text }] }
-    ];
-
     chatHistory.push({ role: "user", parts: [{ text: text }] });
 
     try {
-      const response = await fetch(GEMINI_ENDPOINT + "?key=" + GEMINI_API_KEY, {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: contents,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 512
-          }
-        })
+        body: JSON.stringify({ message: text, history: chatHistory }),
       });
 
-      const rawText = await response.text();
-
-      if (!response.ok) {
-        let errMsg = "HTTP " + response.status;
-        try {
-          const errData = JSON.parse(rawText);
-          errMsg = errData?.error?.message || errMsg;
-        } catch (_) {}
-        throw new Error(errMsg);
-      }
-
-      const data = JSON.parse(rawText);
+      const data = await response.json();
       const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (!reply) throw new Error("Empty reply from Gemini.");
@@ -225,7 +190,7 @@ function injectGeminiChat() {
     } catch (err) {
       removeTyping();
       console.error("[Gemini Error]", err.message);
-      appendMessage("bot", "Error: " + err.message);
+      appendMessage("bot", "Sorry, something went wrong. Please try again.");
     } finally {
       sendBtn.disabled = false;
       inputEl.disabled = false;
