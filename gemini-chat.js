@@ -189,7 +189,7 @@ const reply = data?.text;
       console.error("[Gemini Error]", err.message);
       // Remove the failed user message from history so it doesn't corrupt context
       chatHistory.pop();
-      appendMessage("bot", "Sorry, something went wrong. Please try again.");
+      appendMessage("bot", "I'm currently busy or out of quota. Please try again in a few seconds.");
     } finally {
       sendBtn.disabled = false;
       inputEl.disabled = false;

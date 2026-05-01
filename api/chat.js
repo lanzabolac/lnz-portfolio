@@ -1,4 +1,4 @@
-export const config = { runtime: "edge" };
+// export const config = { runtime: "edge" };
 
 const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on Lanz Paulo Abolac's personal portfolio website. Your role is to help visitors learn about Lanz and his work. Here is everything about Lanz:
 
@@ -30,7 +30,7 @@ export default async function handler(req) {
     const { history } = await req.json();
 
     // Use a valid Gemini model name
-    const MODEL = "gemini-2.0-flash";
+    const MODEL = "gemini-1.5-flash";
 
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${process.env.GEMINI_API_KEY}`,
