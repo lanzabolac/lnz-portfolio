@@ -1,87 +1,45 @@
+// api/chat.js
 export const config = { runtime: "edge" };
 
-const SYSTEM_CONTEXT = `
-You are Pau, a helpful AI assistant embedded in Lanz Paulo Abolac's portfolio website.
+const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on Lanz Paulo Abolac's personal portfolio website. Your role is to help visitors learn about Lanz and his work. Here is everything about Lanz:
 
-Your role:
-- Only answer questions about Lanz Paulo Abolac
-- Or general web development topics
-- Be concise, friendly, and professional
-
-About Lanz:
 - Full name: Lanz Paulo Abolac
-- Role: Web Developer (fresh graduate, backend-focused)
-- Education: BS Information Technology, Bulacan State University - Bustos Campus (2022-2026)
-- Internship: Web Developer Intern at Magellan Solutions (Laravel, MySQL)
-- Tech Stack: PHP, Laravel, Node.js, JavaScript, Python, MySQL, HTML, CSS, Django, Java, C++
-- Projects:
-  1. UAT System (Laravel + MySQL)
-  2. BulSU Faculty Management System (PHP + MySQL)
-  3. Coffee Spot (Web project)
-  4. Pasta & Co (Frontend restaurant website)
-- Interests: Food, Music, Guitar
-- Location: Bustos, Bulacan, Philippines
-`;
+- Role: Web Developer (fresh graduate, focused on backend development)
+- Education: BS Information Technology, Bulacan State University - Bustos Campus (2022-2026). Senior High: ICT Programming, Aclc College of Baliuag (2020-2022)
+- Experience: Web Developer Intern at Magellan Solutions (December 2025 - March 2026). Developed backend features using Laravel and MySQL. Improved system performance by 30% and reduced response time by 25%.
+- Tech Stack: C++, Java, Django, PHP, Node.js, JavaScript, HTML, CSS, MySQL, Python, Figma, Canva, Laravel
+- Projects: (1) User Acceptance Form (UAT) - Laravel/MySQL system built during OJT at Magellan Solutions. (2) BulSU Faculty Management System - Capstone project for Bulacan State University Bustos Campus using PHP and MySQL. (3) Coffee Spot - Web 2 project. (4) Pasta and Co. - Frontend restaurant website using HTML, CSS, JavaScript.
+- Certifications: Cisco Networking Academy Introduction to Packet Tracer (May 2024)
+- Interests: Food, Music, Guitar, Curious by nature
+- Contact: abolaclanzpaulo@gmail.com, phone +63 949 8748 964, located in Bustos, Bulacan, Philippines
+- Social media: GitHub at lanzabolac, LinkedIn at /in/abolac/, Facebook, Instagram at flrslnz_
+
+Keep answers concise, friendly, and professional. Only answer questions about Lanz or general web development topics.`;
 
 export default async function handler(req) {
-  try {
-    const { message, history } = await req.json();
+  const { message, history } = await req.json();
 
-    // ✅ sanitize history
-    const cleanHistory = (history || []).map((msg) => ({
-      role: msg.role === "model" ? "model" : "user",
-      parts: Array.isArray(msg.parts) ? msg.parts : [{ text: msg.text || "" }],
-    }));
+  const contents = [
+    { role: "user", parts: [{ text: SYSTEM_CONTEXT + "\n\nPlease confirm you understand your role." }] },
+    { role: "model", parts: [{ text: "Understood! I'm Pau, ready to help visitors learn about Lanz Paulo Abolac. What would you like to know?" }] },
+    ...history,
+    { role: "user", parts: [{ text: message }] }
+  ];
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: SYSTEM_CONTEXT }],
-          },
-          contents: [
-            {
-              role: "model",
-              parts: [{ text: "Understood. I will follow the system instructions." }],
-            },
-            ...cleanHistory,
-            {
-              role: "user",
-              parts: [{ text: message }],
-            },
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 512,
-          },
-        }),
-      }
-    );
-
-    // ✅ error handling
-    if (!response.ok) {
-      const err = await response.text();
-      return new Response(JSON.stringify({ error: err }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    const data = await response.json();
-
-    return new Response(JSON.stringify(data), {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    return new Response(
-      JSON.stringify({ error: error.message || "Server error" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
+      body: JSON.stringify({
+        contents,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 512 }
+      }),
+    }
+  );
+
+  const data = await res.json();
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
