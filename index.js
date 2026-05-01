@@ -295,11 +295,25 @@ openGallery.addEventListener("click", () => {
     galleryContainer.innerHTML = "<p>No screenshots available.</p>";
   } else {
     currentImages.forEach((src) => {
-      const img = document.createElement("img");
-      img.src = src.trim();
-      img.alt = "project screenshot";
-      galleryContainer.appendChild(img);
-    });
+  const cleanSrc = src.trim();
+
+  if (cleanSrc.endsWith(".mp4") || cleanSrc.endsWith(".webm")) {
+    const video = document.createElement("video");
+    video.src = cleanSrc;
+    video.controls = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.style.width = "100%";
+    video.style.borderRadius = "10px";
+    galleryContainer.appendChild(video);
+  } else {
+    const img = document.createElement("img");
+    img.src = cleanSrc;
+    img.alt = "project screenshot";
+    galleryContainer.appendChild(img);
+  }
+});
   }
 
   imageModal.classList.add("open");
