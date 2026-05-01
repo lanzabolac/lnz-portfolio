@@ -14,6 +14,7 @@ const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on La
 
 Keep answers concise, friendly, and professional. Only answer questions about Lanz or general web development topics.`;
 
+// Chat history — push to this BEFORE calling the API
 let chatHistory = [];
 
 function injectGeminiChat() {
@@ -27,9 +28,9 @@ function injectGeminiChat() {
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#4285f4"/>
-            <stop offset="33%" stop-color="#ea4335"/>
-            <stop offset="66%" stop-color="#fbbc04"/>
+            <stop offset="0%"   stop-color="#4285f4"/>
+            <stop offset="33%"  stop-color="#ea4335"/>
+            <stop offset="66%"  stop-color="#fbbc04"/>
             <stop offset="100%" stop-color="#34a853"/>
           </linearGradient>
         </defs>
@@ -101,7 +102,7 @@ function injectGeminiChat() {
     });
   });
 
-  // ── AUTO-RESIZE ───────────────────────────────────────────
+  // ── AUTO-RESIZE TEXTAREA ──────────────────────────────────
   inputEl.addEventListener("input", () => {
     inputEl.style.height = "auto";
     inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + "px";
@@ -169,27 +170,42 @@ function injectGeminiChat() {
     inputEl.disabled = true;
     showTyping();
 
-    chatHistory.push({ role: "user", parts: [{ text: text }] });
+    // FIX: Push user message into history BEFORE the API call
+    chatHistory.push({ role: "user", parts: [{ text }] });
 
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: chatHistory }),
+        // FIX: Only send history — the API route no longer appends message separately
+        body: JSON.stringify({ history: chatHistory }),
       });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        console.error("[API Error]", response.status, errData);
+        throw new Error(`API error ${response.status}`);
+      }
 
       const data = await response.json();
       const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-      if (!reply) throw new Error("Empty reply from Gemini.");
+      if (!reply) {
+        console.error("[Empty Reply] Full response:", JSON.stringify(data));
+        throw new Error("Empty reply from Gemini.");
+      }
 
+      // Push model reply into history to maintain conversation context
       chatHistory.push({ role: "model", parts: [{ text: reply }] });
+
       removeTyping();
       appendMessage("bot", reply);
 
     } catch (err) {
       removeTyping();
       console.error("[Gemini Error]", err.message);
+      // Remove the failed user message from history so it doesn't corrupt context
+      chatHistory.pop();
       appendMessage("bot", "Sorry, something went wrong. Please try again.");
     } finally {
       sendBtn.disabled = false;
