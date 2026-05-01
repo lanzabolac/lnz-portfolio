@@ -1,4 +1,3 @@
-// api/chat.js
 export const config = { runtime: "edge" };
 
 const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on Lanz Paulo Abolac's personal portfolio website. Your role is to help visitors learn about Lanz and his work. Here is everything about Lanz:
@@ -17,7 +16,6 @@ const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on La
 Keep answers concise, friendly, and professional. Only answer questions about Lanz or general web development topics.`;
 
 export default async function handler(req) {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -32,33 +30,32 @@ export default async function handler(req) {
   try {
     const { history } = await req.json();
 
-    // history already includes the latest user message from the frontend
-    const contents = [
-    {
-        role: "user",
-        parts: [{ text: "You are Pau, an AI assistant..." }],
-    },
-    {
-        role: "model",
-        parts: [{ text: "Understood." }],
-    },
-    ...history,
-    ];
+    // ✅ Use the correct Gemini 2.5 Flash Preview model string
+    const MODEL = "gemini-3-flash-preview";
 
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents,
-          generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
+          // ✅ System prompt goes here — NOT inside contents
+          systemInstruction: {
+            parts: [{ text: SYSTEM_CONTEXT }],
+          },
+          // ✅ Just pass history directly — no fake primer turns needed
+          contents: history,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 512,
+          },
         }),
       }
     );
 
     const data = await geminiRes.json();
 
+    // ✅ Log the full error so you can see it in Vercel's function logs
     if (!geminiRes.ok) {
       console.error("[Gemini API Error]", JSON.stringify(data));
       return new Response(
