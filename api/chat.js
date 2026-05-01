@@ -38,18 +38,22 @@ export default async function handler(req) {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          // ✅ System prompt goes here — NOT inside contents
-          systemInstruction: {
-            parts: [{ text: SYSTEM_CONTEXT }],
-          },
-          // ✅ Just pass history directly — no fake primer turns needed
-          contents: history,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 512,
-          },
-        }),
+
+// Inside the fetch body:
+body: JSON.stringify({
+  systemInstruction: {
+    parts: [{ text: SYSTEM_CONTEXT }],
+  },
+  contents: history,
+  generationConfig: {
+    temperature: 0.7,
+    maxOutputTokens: 512,
+  },
+  // ✅ Disable thinking for a simple chatbot — faster & cheaper
+  thinkingConfig: {
+    thinkingBudget: 0,
+  },
+}),
       }
     );
 
