@@ -31,29 +31,25 @@ export default async function handler(req) {
     const { history } = await req.json();
 
     // ✅ Use the correct Gemini 2.5 Flash Preview model string
-    const MODEL = "gemini-3-flash-preview";
+    const MODEL = "gemini-2.5-flash-preview-05-20";
 
     const geminiRes = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-
-// Inside the fetch body:
-body: JSON.stringify({
-  systemInstruction: {
-    parts: [{ text: SYSTEM_CONTEXT }],
-  },
-  contents: history,
-  generationConfig: {
-    temperature: 0.7,
-    maxOutputTokens: 512,
-  },
-  // ✅ Disable thinking for a simple chatbot — faster & cheaper
-  thinkingConfig: {
-    thinkingBudget: 0,
-  },
-}),
+        body: JSON.stringify({
+          // ✅ System prompt goes here — NOT inside contents
+          systemInstruction: {
+            parts: [{ text: SYSTEM_CONTEXT }],
+          },
+          // ✅ Just pass history directly — no fake primer turns needed
+          contents: history,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 512,
+          },
+        }),
       }
     );
 

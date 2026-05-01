@@ -188,8 +188,8 @@ function injectGeminiChat() {
       }
 
       const data = await response.json();
-const parts = data?.candidates?.[0]?.content?.parts ?? [];
-const reply = parts.find(p => p.text && !p.thought)?.text;
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
       if (!reply) {
         console.error("[Empty Reply] Full response:", JSON.stringify(data));
         throw new Error("Empty reply from Gemini.");
