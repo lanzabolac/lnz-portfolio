@@ -14,22 +14,23 @@ const SYSTEM_CONTEXT = `You are a helpful AI assistant named Pau, embedded on La
 - Social media: GitHub at lanzabolac, LinkedIn at /in/abolac/, Facebook, Instagram at flrslnz_
 
 Keep answers concise, friendly, and professional. Only answer questions about Lanz or general web development topics.`;
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 export default async function handler(req) {
   if (req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
+    return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
   try {
     const { history } = await req.json();
 
-    const MODEL = "gemini-1.5-flash";
+    // Use a valid Gemini model name
+    const MODEL = "gemini-2.0-flash";
 
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${process.env.GEMINI_API_KEY}`,
@@ -37,44 +38,49 @@ export default async function handler(req) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-  contents: [
-    {
-      role: "user",
-      parts: [{ text: SYSTEM_CONTEXT }],
-    },
-    ...(history || []),
-  ],
-  generationConfig: {
-    temperature: 0.7,
-    maxOutputTokens: 512,
-  },
-}),
+          // systemInstruction keeps the system prompt separate from chat history
+          // so Gemini doesn't confuse it with a user turn
+          systemInstruction: {
+            parts: [{ text: SYSTEM_CONTEXT }],
+          },
+          contents: history || [],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 512,
+          },
+        }),
       }
     );
 
     const data = await res.json();
 
     if (!res.ok) {
-      console.log("GEMINI ERROR:", data);
+      console.error("GEMINI ERROR:", JSON.stringify(data));
       return new Response(JSON.stringify(data), {
         status: res.status,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...CORS_HEADERS },
       });
     }
 
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
+    if (!text) {
+      console.error("Empty reply from Gemini:", JSON.stringify(data));
+      return new Response(
+        JSON.stringify({ error: "Empty reply from Gemini" }),
+        { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
+      );
+    }
+
     return new Response(JSON.stringify({ text }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { "Content-Type": "application/json", ...CORS_HEADERS },
     });
   } catch (err) {
+    console.error("Handler error:", err.message);
     return new Response(
       JSON.stringify({ error: err.message }),
-      { status: 500 }
+      { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
     );
   }
 }
